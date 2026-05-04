@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-eschool-blue: #0f172a;
+  --color-eschool-gold: #fbbf24;
+  --color-eschool-red: #ef4444;
+  --color-eschool-green: #22c55e;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #f8fafc;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
