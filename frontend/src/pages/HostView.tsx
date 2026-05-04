@@ -7,6 +7,13 @@ import { Users, Play, Trophy, ArrowRight, Pause } from 'lucide-react';
 import 'katex/dist/katex.min.css';
 import Latex from 'react-latex-next';
 
+const latexDelimiters = [
+  { left: '$$', right: '$$', display: true },
+  { left: '\\(', right: '\\)', display: false },
+  { left: '$', right: '$', display: false },
+  { left: '\\[', right: '\\]', display: true },
+];
+
 interface Player { id: string; name: string; score: number; }
 interface Question { id: string; question: string; timeLimit: number; image?: string; options: {id: string, text: string}[]; }
 
@@ -184,7 +191,7 @@ export default function HostView() {
                 {question.image && (
                   <img src={question.image} alt="Minh hoạ" className="absolute w-full h-full object-cover opacity-20 pointer-events-none z-0" />
                 )}
-                <h2 className="text-4xl md:text-5xl font-bold leading-tight text-slate-800 z-10"><Latex>{question.question}</Latex></h2>
+                <h2 className="text-4xl md:text-5xl font-bold leading-tight text-slate-800 z-10"><Latex strict={false} delimiters={latexDelimiters}>{question.question}</Latex></h2>
               </div>
               
               <div className="w-full flex justify-end font-bold text-xl text-slate-500 mb-4 px-4">
@@ -195,7 +202,7 @@ export default function HostView() {
                 {question.options.map((opt, i) => (
                   <div key={opt.id} className={`${colors[i]} rounded-2xl flex items-center p-6 shadow-md text-white min-h-24`}>
                     <div className="w-12 h-12 bg-white/20 rounded flex shrink-0 items-center justify-center font-bold text-3xl mr-6">{opt.id}</div>
-                    <span className="text-xl md:text-3xl font-semibold leading-tight"><Latex>{opt.text}</Latex></span>
+                    <span className="text-xl md:text-3xl font-semibold leading-tight"><Latex strict={false} delimiters={latexDelimiters}>{opt.text}</Latex></span>
                   </div>
                 ))}
               </div>
@@ -212,14 +219,14 @@ export default function HostView() {
                   {question.image && (
                     <img src={question.image} alt="Minh hoạ" className="absolute w-full h-full object-cover opacity-20 pointer-events-none z-0" />
                   )}
-                  <h2 className="text-2xl md:text-3xl font-bold text-slate-800 text-center z-10"><Latex>{question.question}</Latex></h2>
+                  <h2 className="text-2xl md:text-3xl font-bold text-slate-800 text-center z-10"><Latex strict={false} delimiters={latexDelimiters}>{question.question}</Latex></h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:h-64 h-auto">
                   {question.options.map((opt, i) => {
                     const isCorrect = opt.id === correctOption;
                     return (
                       <div key={opt.id} className={`${colors[i]} ${!isCorrect && 'opacity-30'} rounded-2xl flex items-center p-4 shadow text-white transition-all`}>
-                        <span className="text-2xl font-bold"><Latex>{opt.text}</Latex></span>
+                        <span className="text-2xl font-bold"><Latex strict={false} delimiters={latexDelimiters}>{opt.text}</Latex></span>
                       </div>
                     );
                   })}
